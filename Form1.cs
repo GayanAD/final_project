@@ -21,20 +21,9 @@ namespace final_project
         public SqlCommand cmd = null;
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            
-           
-
-
-          
+        {   
             setDataGride();
         }
-
-        private void toGenerateID()//***************************************
-        { }
-
-
-
 
         private void setDataGride()//to fill datagride
         {
@@ -139,23 +128,29 @@ namespace final_project
         }
         private void searchCustomer() //to search button
         {
-            try 
+            try
             {
+                clz_sql.con.Open();
                 int cid = Convert.ToInt32(txt_srchid.Text);
-                string cfname = txt_srchnme.Text;
-                if (cid != null && cfname != null)
-                { 
-                 metroGrid1.DataSource=final_project.GetData//????????????????? serch code
+                string cname = txt_srchnme.Text;
+                if (cid != null && cname != null)
+                {
+                    SqlDataAdapter dap = new SqlDataAdapter("SELECT *FROM tbl_customer WHERE sup_ID LIKE '%" + cid + "%' AND sname LIKE '%" + cname + "%'", clz_sql.con);
+                    DataTable dt = new DataTable();
+                    dap.Fill(dt);
+                    metroGrid1.DataSource = dt;
+                    metroGrid1.Refresh();
                 }
 
-                if(metroGrid1.DataSource==null)
+                if (metroGrid1.DataSource == null)
                 {
-                 MessageBox.Show("Not Found Data");
+                    MessageBox.Show("Not Found Data");
                 }
+                clz_sql.con.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-            MessageBox.Show("Error,can not find");
+                MessageBox.Show("Error,can not find");
             }
         
         }
@@ -178,7 +173,7 @@ namespace final_project
         {
             setData();
             toClearText();
-            //to call generate id
+            
         }
 
         private void metroGrid1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -190,7 +185,7 @@ namespace final_project
         {
             updateData();
             toClearText();
-            //this line for call  to generate id
+            
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
