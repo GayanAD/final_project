@@ -16,7 +16,7 @@ namespace final_project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_sales_order());
+            Application.Run(new rpt());
         }
     }
 }

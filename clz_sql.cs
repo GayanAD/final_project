@@ -8,6 +8,6 @@ namespace final_project
 {
     class clz_sql
     {
-        public static SqlConnection con = new SqlConnection("Data Source=DESKTOP-SQIVGEC;Initial Catalog=finalproject;Integrated Security=True");
+       public static SqlConnection con = new SqlConnection("Data Source=DESKTOP-SQIVGEC;Initial Catalog=finalproject;Integrated Security=True");
     }
 }
